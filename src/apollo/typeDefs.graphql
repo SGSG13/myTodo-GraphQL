@@ -1,0 +1,9 @@
+type filters {
+    searchTitle: String,
+    statusFilter: String
+}
+
+input filterInput {
+    filterName: String,
+    value: String
+}

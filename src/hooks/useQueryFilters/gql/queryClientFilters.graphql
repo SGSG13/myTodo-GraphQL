@@ -1,0 +1,6 @@
+query getFilters {
+    filters @client {
+        searchTitle
+        statusFilter
+    }
+}

@@ -1,0 +1,7 @@
+query getTodos {
+    todos @client {
+        id
+        title
+        done
+    }
+}

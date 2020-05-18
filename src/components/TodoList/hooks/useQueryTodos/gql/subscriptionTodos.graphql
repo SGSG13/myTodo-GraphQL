@@ -1,0 +1,7 @@
+subscription changeTodo{
+    todos{
+        id
+        title
+        done
+    }
+}

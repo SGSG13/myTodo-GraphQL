@@ -1,0 +1,3 @@
+mutation setFilter($filter: filterInput!) {
+    setFilter(filter: $filter) @client
+}

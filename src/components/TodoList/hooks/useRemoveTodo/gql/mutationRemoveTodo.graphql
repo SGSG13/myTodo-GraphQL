@@ -1,0 +1,7 @@
+mutation removeTodo($id: ID!){
+    removeTodo(id: $id) {
+        title
+        done
+        id
+    }
+}
