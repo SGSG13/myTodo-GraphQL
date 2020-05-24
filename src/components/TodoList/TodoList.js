@@ -8,30 +8,33 @@ import {useRemoveTodo} from "./hooks/useRemoveTodo";
 
 function TodoList() {
     const {loading, error, todos} = useQueryTodos();
-    const {completeTodo} = useCompleteTodo();
-    const {removeTodo} = useRemoveTodo();
+    const {completeTodo, completeError} = useCompleteTodo();
+    const {removeTodo, removeError} = useRemoveTodo();
 
-    if (error) return <div>Error : {error}</div>;
     if (loading) return <Loader/>;
+    const allErrors = error || completeError || removeError;
+    const errorMessage = allErrors && <div>Error : {allErrors}</div>;
     const isEmpty = todos.length === 0 && !loading;
-    const emptyList = <div className="text-center">List is empty :(</div>;
-
+    const emptyMessage = isEmpty && <div className="text-center">List is empty :(</div>;
     return (
-        <div className={`todo-list ${isEmpty ? 'todo-list_empty' : ''}`}>
-            {isEmpty && emptyList}
-            <ul>
-                {
-                    todos.map(todo => (
-                        <Todo
-                            key={todo.id}
-                            doneItem={completeTodo}
-                            removeItem={removeTodo}
-                            {...todo}
-                        />
-                    ))
-                }
-            </ul>
-        </div>
+        <>
+            {errorMessage}
+            <div className={`todo-list ${isEmpty ? 'todo-list_empty' : ''}`}>
+                {emptyMessage}
+                <ul>
+                    {
+                        todos.map(todo => (
+                            <Todo
+                                key={todo.id}
+                                doneItem={completeTodo}
+                                removeItem={removeTodo}
+                                {...todo}
+                            />
+                        ))
+                    }
+                </ul>
+            </div>
+        </>
     );
 }
 
